@@ -1,3 +1,5 @@
+import a4out.myLanguageBaseVisitor;
+import a4out.myLanguageParser;
 import classes.*;
 import classes.SymbolTable.VariableInfo;
 import classes.SymbolTable.Types;
