@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+
 /**
  * Main class of the compiler. Initialises antlr lexer, parser and visitor from filename argument and visits the
  * parse tree for code generation
@@ -40,13 +41,24 @@ public class Compile {
       for (String filename : filenames) {
         compile(directory + "/" + filename, directory + "/MIPSOut/" + filename);
       }
-    } else if (args.length == 3 && args[1].equals("-o")) {
-      // compile with custom output file name
-      compile(args[0], args[2]);
     } else {
-      // compile all files
-      for (String filename : args) {
-        compile(filename, filename);
+      int index;
+      if (args.length >= 3 && (index = Arrays.asList(args).indexOf("-o")) != -1) {
+        // compile all with custom output file names
+        int left = 0, right = index + 1;
+        while (left < index) {
+          if (right < args.length) {
+            compile(args[left], args[right++]);
+          } else {
+            compile(args[left], args[left]);
+          }
+          left++;
+        }
+      } else {
+        // compile all files
+        for (String filename : args) {
+          compile(filename, filename);
+        }
       }
     }
   }
