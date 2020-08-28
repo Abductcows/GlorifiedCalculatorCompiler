@@ -1,0 +1,10 @@
+mainclass FloatOverflow {
+public static void main ( )
+{
+    float f;
+
+    for (f = 5; ; f = f * 10) {
+        println(f);
+    }
+}
+}

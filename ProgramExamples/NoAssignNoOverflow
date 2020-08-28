@@ -1,0 +1,11 @@
+mainclass NoOverflow {
+public static void main ( )
+{
+    int negative, max;
+    max = 1073741823;
+
+    println(max + 5);
+    negative = max + 5;
+    println(negative);
+}
+}

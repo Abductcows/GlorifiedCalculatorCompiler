@@ -1,0 +1,19 @@
+mainclass IntOverflow {
+public static void main ( )
+{
+    int i, max, product;
+    max = 1073741823;
+
+    for (i=1; i<8; i=i+1) {
+        product = max * i;
+        println(product);
+    }
+
+    i = max;
+    i = i + 1;
+    println(i);
+    i = -max - 1;
+    i = i - 1;
+    println(i);
+}
+}

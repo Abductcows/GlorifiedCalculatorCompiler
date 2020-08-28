@@ -1,0 +1,6 @@
+mainclass test {
+public static void main ( )
+{
+    int main;
+}
+}

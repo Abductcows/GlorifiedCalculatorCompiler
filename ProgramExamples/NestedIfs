@@ -1,0 +1,20 @@
+mainclass NestedIfs {
+public static void main ( )
+{
+    int i;
+    i = 10;
+
+
+    if (i <= 9) {
+        if (i > 0) {
+            println(1);
+        }
+    } else {
+        if (i > 12) {
+            println(1);
+        } else {
+            ;
+        }
+    }
+}
+}

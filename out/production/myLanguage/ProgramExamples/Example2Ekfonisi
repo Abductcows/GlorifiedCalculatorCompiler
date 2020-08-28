@@ -1,0 +1,18 @@
+mainclass Example {
+public static void main ( )
+{
+int c;
+float x, sum, mo;
+c=0;
+x=3.5;
+sum=0.0;
+while (c<5)
+{
+sum=sum+x;
+c=c+1;
+x=x+1.5;
+}
+mo=sum/5;
+println (mo);
+}
+}
