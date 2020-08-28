@@ -1,11 +1,7 @@
 package utilities;
 
+@SuppressWarnings("SpellCheckingInspection")
 public class MyLanguageNumbersHelper {
-  public static class BadDeclarationValueException extends RuntimeException {
-    public BadDeclarationValueException(String s) {
-      super(s);
-    }
-  }
   public static void main(String[] args) {
 
     for (int i=1; i<10; i++) {
@@ -15,13 +11,9 @@ public class MyLanguageNumbersHelper {
     }
   }
   public static final String INT_MAX = "1073741823";
-  public static final int INT_MAX_VALUE = 1073741823;
   public static final String INT_MIN = "-1073741824";
-  public static final int INT_MIN_VALUE = -1073741824;
   public static final String FLOAT_MAX = "98079714615416886934934209737619787751599303819750539264";
-  public static final double FLOAT_MAX_VALUE = 98079714615416886934934209737619787751599303819750539264D;
   public static final String FLOAT_MIN = "1.593091911132452E-58";
-  public static final double FLOAT_MIN_VALUE = 1.593091911132452E-58;
 
   /**
    * Max and min values for ints and floats. Float min and max refer to it's absolute value
@@ -40,6 +32,7 @@ public class MyLanguageNumbersHelper {
   /**
    * Messages for exceptions
    */
+  @SuppressWarnings("SpellCheckingInspection")
   public static String getArithmeticErrorMessageDeclarations() {
     return
         "_divByZeroMessage: .asciiz \"\\nException: division by zero\\nProgram will be terminated\\n\"\n" +

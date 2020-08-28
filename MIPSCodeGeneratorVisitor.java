@@ -1,13 +1,14 @@
 import a4out.myLanguageBaseVisitor;
 import a4out.myLanguageParser;
 import utilities.*;
-import utilities.SymbolTable.VariableInfo;
 import utilities.SymbolTable.Types;
+import utilities.SymbolTable.VariableInfo;
 
 /**
  * Visitor class used for the traversal of the parse tree and generation of MIPS instructions. This class uses objects
  * of the "classes" package for utilities as well as for writing to the files.
  */
+@SuppressWarnings("SpellCheckingInspection")
 public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo> {
 
   private final MIPSInstructionsHelper helper;

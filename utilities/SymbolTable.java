@@ -36,6 +36,7 @@ public class SymbolTable {
   /**
    * Class storing information tied to a variable or an expression.
    */
+  @SuppressWarnings("unused")
   public static class VariableInfo {
     private final String id;
     private final Types type;

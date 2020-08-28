@@ -5,6 +5,7 @@ import java.util.HashMap;
 /**
  * Helper class that returns Strings containing instructions. Newline is never appended
  */
+@SuppressWarnings("SpellCheckingInspection")
 public class MIPSInstructionsHelper {
 
   public static final HashMap<String, String> intBranches = new HashMap<>();
@@ -92,6 +93,7 @@ public class MIPSInstructionsHelper {
    * Instruction for setting the bool stack pointer to the start of the stack
    * @return  String containing the instruction
    */
+  @SuppressWarnings("unused")
   public String resetBoolStack() {
     return String.format("la %s, _boolStack", MIPSStackTracker.boolStackRegister);
   }

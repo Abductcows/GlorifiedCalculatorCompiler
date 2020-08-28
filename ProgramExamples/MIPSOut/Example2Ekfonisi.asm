@@ -21,12 +21,20 @@ _FLOAT_MIN: .align 3
 .double 1.593091911132452E-58
 _FLOAT_MIN_NEG: .align 3
 .double -1.593091911132452E-58
-product: .align 2
+_float0: .align 3
+.double 3.5
+_float1: .align 3
+.double 0.0
+_float2: .align 3
+.double 1.5
+mo: .align 3
+.double 0.000000
+c: .align 2
 .word 0
-max: .align 2
-.word 0
-i: .align 2
-.word 0
+x: .align 3
+.double 0.000000
+sum: .align 3
+.double 0.000000
 .text
 la $s0, _intStack
 la $s2, _floatStack
@@ -93,7 +101,7 @@ jr $ra
 
 
 main:
-li $t0, 1073741823
+li $t0, 0
 sw $t0, ($s0)
 addi $s0, $s0, 4
 addi $s0, $s0, -4
@@ -101,29 +109,36 @@ lw $t0, ($s0)
 move $a0, $t0
 jal _intOverflowCheck
 move $t0, $v0
-sw $t0, max
+sw $t0, c
 sw $t0, ($s0)
 addi $s0, $s0, 4
 la $s0, _intStack
 la $s2, _floatStack
-li $t0, 1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t0, ($s0)
-move $a0, $t0
-jal _intOverflowCheck
-move $t0, $v0
-sw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
+l.d $f4, _float0
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+s.d $f4, x
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+la $s0, _intStack
+la $s2, _floatStack
+l.d $f4, _float1
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+s.d $f4, sum
+s.d $f4, ($s2)
+addi $s2, $s2, 8
 la $s0, _intStack
 la $s2, _floatStack
 _while0: 
-lw $t0, i
+lw $t0, c
 sw $t0, ($s0)
 addi $s0, $s0, 4
-li $t0, 8
+li $t0, 5
 sw $t0, ($s0)
 addi $s0, $s0, 4
 addi $s0, $s0, -4
@@ -142,41 +157,30 @@ _afterIf0:
 addi $s4, $s4, -4
 lw $t0, ($s4)
 beq $t0, 0, _afterWhile0 
-lw $t0, max
-sw $t0, ($s0)
-addi $s0, $s0, 4
-lw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t1, ($s0)
-addi $s0, $s0, -4
-lw $t0, ($s0)
-mult $t0, $t1
-mflo $t0
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t0, ($s0)
-move $a0, $t0
-jal _intOverflowCheck
-move $t0, $v0
-sw $t0, product
-sw $t0, ($s0)
-addi $s0, $s0, 4
+l.d $f4, sum
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+l.d $f4, x
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f6, ($s2)
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+add.d $f4, $f4, $f6
+mov.d $f20, $f4
+mfc1.d $a0, $f20
+jal _floatOverflowCheck
+s.d $f20, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+s.d $f4, sum
+s.d $f4, ($s2)
+addi $s2, $s2, 8
 la $s0, _intStack
 la $s2, _floatStack
-lw $t0, product
-sw $t0, ($s0)
-addi $s0, $s0, 4
-li $v0 1
-addi $s0, $s0, -4
-lw $a0, ($s0)
-syscall
-li $v0, 4
-la $a0, _newLine
-syscall
-lw $t0, i
+lw $t0, c
 sw $t0, ($s0)
 addi $s0, $s0, 4
 li $t0, 1
@@ -194,116 +198,71 @@ lw $t0, ($s0)
 move $a0, $t0
 jal _intOverflowCheck
 move $t0, $v0
-sw $t0, i
+sw $t0, c
 sw $t0, ($s0)
 addi $s0, $s0, 4
+la $s0, _intStack
+la $s2, _floatStack
+l.d $f4, x
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+l.d $f4, _float2
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f6, ($s2)
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+add.d $f4, $f4, $f6
+mov.d $f20, $f4
+mfc1.d $a0, $f20
+jal _floatOverflowCheck
+s.d $f20, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+s.d $f4, x
+s.d $f4, ($s2)
+addi $s2, $s2, 8
 la $s0, _intStack
 la $s2, _floatStack
 j _while0 
 _afterWhile0: 
-lw $t0, max
+l.d $f4, sum
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+li $t0, 5
 sw $t0, ($s0)
 addi $s0, $s0, 4
+addi $s2, $s2, -8
+l.d $f4, ($s2)
 addi $s0, $s0, -4
 lw $t0, ($s0)
-move $a0, $t0
-jal _intOverflowCheck
-move $t0, $v0
-sw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
+mtc1 $t0, $f6
+cvt.d.w $f6, $f6
+mtc1 $zero, $f8
+cvt.d.w $f8, $f8
+c.eq.d $f6, $f8
+bc1t _divByZero
+div.d $f4, $f4, $f6
+mov.d $f20, $f4
+mfc1.d $a0, $f20
+jal _floatOverflowCheck
+s.d $f20, ($s2)
+addi $s2, $s2, 8
+addi $s2, $s2, -8
+l.d $f4, ($s2)
+s.d $f4, mo
+s.d $f4, ($s2)
+addi $s2, $s2, 8
 la $s0, _intStack
 la $s2, _floatStack
-lw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-li $t0, 1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t1, ($s0)
-addi $s0, $s0, -4
-lw $t0, ($s0)
-add $t0, $t0, $t1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t0, ($s0)
-move $a0, $t0
-jal _intOverflowCheck
-move $t0, $v0
-sw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-la $s0, _intStack
-la $s2, _floatStack
-lw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-li $v0 1
-addi $s0, $s0, -4
-lw $a0, ($s0)
-syscall
-li $v0, 4
-la $a0, _newLine
-syscall
-lw $t0, max
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t0, ($s0)
-subu $t0, $zero, $t0
-sw $t0, ($s0)
-addi $s0, $s0, 4
-li $t0, 1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t1, ($s0)
-addi $s0, $s0, -4
-lw $t0, ($s0)
-sub $t0, $t0, $t1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t0, ($s0)
-move $a0, $t0
-jal _intOverflowCheck
-move $t0, $v0
-sw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-la $s0, _intStack
-la $s2, _floatStack
-lw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-li $t0, 1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t1, ($s0)
-addi $s0, $s0, -4
-lw $t0, ($s0)
-sub $t0, $t0, $t1
-sw $t0, ($s0)
-addi $s0, $s0, 4
-addi $s0, $s0, -4
-lw $t0, ($s0)
-move $a0, $t0
-jal _intOverflowCheck
-move $t0, $v0
-sw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-la $s0, _intStack
-la $s2, _floatStack
-lw $t0, i
-sw $t0, ($s0)
-addi $s0, $s0, 4
-li $v0 1
-addi $s0, $s0, -4
-lw $a0, ($s0)
+l.d $f4, mo
+s.d $f4, ($s2)
+addi $s2, $s2, 8
+li $v0 3
+addi $s2, $s2, -8
+l.d $f12, ($s2)
 syscall
 li $v0, 4
 la $a0, _newLine

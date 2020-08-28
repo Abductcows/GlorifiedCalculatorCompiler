@@ -1,10 +1,10 @@
 import a4out.myLanguageLexer;
 import a4out.myLanguageParser;
-import utilities.SymbolTable;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
+import utilities.SymbolTable;
 
 import java.io.File;
 import java.io.IOException;
@@ -62,7 +62,7 @@ public class Compile {
     myLanguageParser parser = new myLanguageParser(tokens);
     ParseTree tree = parser.program(); // Start at the first rule
 
-    ParseTreeVisitor<SymbolTable.VariableInfo> visitor = new MIPSCodeGeneratorVisitor(outputName);
+    ParseTreeVisitor<SymbolTable.VariableInfo> visitor = new MIPSCodeGeneratorVisitor(outputName); // MIPS generator visitor
     visitor.visit(tree);
   }
 
