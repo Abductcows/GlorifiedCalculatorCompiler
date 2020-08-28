@@ -9,23 +9,6 @@ import java.util.stream.Collectors;
  * Symbol table class utilising a HashMap using IDs as keys
  */
 public class SymbolTable {
-  /**
-   * Exception indicating multiple declarations of the same ID
-   */
-  public static class AlreadyDefinedException extends RuntimeException {
-    public AlreadyDefinedException(String variableName) {
-      super(String.format("Variable \"%s\" defined multiple times\n", variableName));
-    }
-  }
-
-  /**
-   * Exception indicating the referencing of an variable ID without prior declaration
-   */
-  public static class NotDefinedException extends RuntimeException {
-    public NotDefinedException(String variableName) {
-      super(String.format("Variable \"%s\" used but never defined\n", variableName));
-    }
-  }
 
   /**
    * Enum of types INT and FLOAT. FLOAT refers to the language's float type and not standard binary32 floating point

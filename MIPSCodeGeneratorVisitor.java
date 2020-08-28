@@ -87,6 +87,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
    * case of multiple declarations of the same id
    * @return  null, as it is a statement
    */
+  @SuppressWarnings("DuplicateBranchesInSwitch")
   @Override
   public VariableInfo visitDeclaration(myLanguageParser.DeclarationContext ctx) {
     Types decType;
@@ -99,7 +100,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
         decType = Types.FLOAT;
         break;
       default:
-        decType = Types.valueOf("");
+        decType = Types.INT;
     }
 
     // check all IDs
@@ -115,7 +116,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
             symbolTable.insert(id, 0.0F);
         }
       } else {
-        throw new SymbolTable.AlreadyDefinedException(id);
+        throw new RuntimeException("Variable \"" + id + "\"" + " already defined");
       }
       i+=2; // skip the ','
     }
@@ -192,7 +193,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
     // check if variable has been declared
     VariableInfo var1 = symbolTable.get(id);
     if (var1 == null) {
-      throw new SymbolTable.NotDefinedException(id);
+      throw new RuntimeException("Variable \"" + id + "\"" + " referenced but not previously defined");
     }
 
     // evaluate right hand expression and get its type
@@ -674,7 +675,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
   public VariableInfo visitFactorID(myLanguageParser.FactorIDContext ctx) {
     String id = ctx.getText();
     if (symbolTable.get(id) == null) {
-      throw new SymbolTable.NotDefinedException(id);
+      throw new RuntimeException("Variable \"" + id + "\"" + " referenced but not previously defined");
     }
 
     VariableInfo info = symbolTable.get(id);

@@ -6,12 +6,6 @@ package utilities;
  */
 public class MIPSStackTracker {
 
-  private static class MIPSStackOverflow extends RuntimeException {
-    public MIPSStackOverflow(String stack) {
-      super(stack + " stack overflow detected");
-    }
-  }
-
   public static final String
       intStackRegister = "$s0",
       floatStackRegister = "$s2",
@@ -28,7 +22,7 @@ public class MIPSStackTracker {
    */
   public void registerIntStackPush() {
     if (intStackByte >= stackSizeBytes) {
-      throw new MIPSStackOverflow("Int");
+      throw new RuntimeException("Int stack overflow detected");
     }
     intStackByte += 4;
   }
@@ -38,7 +32,7 @@ public class MIPSStackTracker {
    */
   public void registerFloatStackPush() {
     if (floatStackByte >= stackSizeBytes) {
-      throw new MIPSStackOverflow("Float");
+      throw new RuntimeException("Float stack overflow detected");
     }
     floatStackByte += 4;
   }
@@ -48,7 +42,7 @@ public class MIPSStackTracker {
    */
   public void registerBoolStackPush() {
     if (boolStackByte >= stackSizeBytes) {
-      throw new MIPSStackOverflow("Boolean");
+      throw new RuntimeException("Boolean stack overflow detected");
     }
     boolStackByte += 4;
   }
