@@ -1,6 +1,5 @@
-package classes;
+package utilities;
 
-import classes.SymbolTable.*;
 import java.io.*;
 import java.time.LocalDateTime;
 
@@ -91,6 +90,7 @@ public class MIPSWriter {
   /**
    * Copies the contents of both temporary files to create the final .asm file. Copies data first
    */
+  @SuppressWarnings("ResultOfMethodCallIgnored")
   public void mergeFiles() {
     // Close temp writers
     try {

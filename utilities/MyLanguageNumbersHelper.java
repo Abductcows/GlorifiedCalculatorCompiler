@@ -1,4 +1,4 @@
-package classes;
+package utilities;
 
 public class MyLanguageNumbersHelper {
   public static class BadDeclarationValueException extends RuntimeException {

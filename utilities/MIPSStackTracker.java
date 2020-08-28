@@ -1,4 +1,4 @@
-package classes;
+package utilities;
 
 /**
  * Compile time int/float/bool stack overflow checker. Also returns instructions for the stack declaration and

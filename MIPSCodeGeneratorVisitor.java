@@ -1,8 +1,8 @@
 import a4out.myLanguageBaseVisitor;
 import a4out.myLanguageParser;
-import classes.*;
-import classes.SymbolTable.VariableInfo;
-import classes.SymbolTable.Types;
+import utilities.*;
+import utilities.SymbolTable.VariableInfo;
+import utilities.SymbolTable.Types;
 
 /**
  * Visitor class used for the traversal of the parse tree and generation of MIPS instructions. This class uses objects
