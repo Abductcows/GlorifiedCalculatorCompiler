@@ -114,14 +114,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_program; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterProgram(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitProgram(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitProgram(this);
 			else return visitor.visitChildren(this);
@@ -180,14 +172,6 @@ public class myLanguageParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_comp_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterComp_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitComp_stmt(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitComp_stmt(this);
@@ -262,14 +246,6 @@ public class myLanguageParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterStmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitStmt(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitStmt(this);
@@ -369,14 +345,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_declaration; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterDeclaration(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitDeclaration(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitDeclaration(this);
 			else return visitor.visitChildren(this);
@@ -439,14 +407,6 @@ public class myLanguageParser extends Parser {
 	public static class TypeFloatContext extends TypeContext {
 		public TypeFloatContext(TypeContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterTypeFloat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitTypeFloat(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitTypeFloat(this);
 			else return visitor.visitChildren(this);
@@ -454,14 +414,6 @@ public class myLanguageParser extends Parser {
 	}
 	public static class TypeIntContext extends TypeContext {
 		public TypeIntContext(TypeContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterTypeInt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitTypeInt(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitTypeInt(this);
@@ -513,14 +465,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_null_stmt; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterNull_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitNull_stmt(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitNull_stmt(this);
 			else return visitor.visitChildren(this);
@@ -556,14 +500,6 @@ public class myLanguageParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_println_stmt; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterPrintln_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitPrintln_stmt(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitPrintln_stmt(this);
@@ -609,14 +545,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_assign_stmt; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterAssign_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitAssign_stmt(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitAssign_stmt(this);
 			else return visitor.visitChildren(this);
@@ -655,14 +583,6 @@ public class myLanguageParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_assign_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterAssign_expr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitAssign_expr(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitAssign_expr(this);
@@ -710,14 +630,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_bool_expr; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterBool_expr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitBool_expr(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitBool_expr(this);
 			else return visitor.visitChildren(this);
@@ -760,14 +672,6 @@ public class myLanguageParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitExpr(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitExpr(this);
@@ -827,14 +731,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_for_stmt; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterFor_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitFor_stmt(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitFor_stmt(this);
 			else return visitor.visitChildren(this);
@@ -886,14 +782,6 @@ public class myLanguageParser extends Parser {
 			super(parent, invokingState);
 		}
 		@Override public int getRuleIndex() { return RULE_opassign_expr; }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterOpassign_expr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitOpassign_expr(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitOpassign_expr(this);
@@ -953,14 +841,6 @@ public class myLanguageParser extends Parser {
 		}
 		public OpBoolPresentContext(Opbool_exprContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterOpBoolPresent(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitOpBoolPresent(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitOpBoolPresent(this);
 			else return visitor.visitChildren(this);
@@ -968,14 +848,6 @@ public class myLanguageParser extends Parser {
 	}
 	public static class OpBoolAbsentContext extends Opbool_exprContext {
 		public OpBoolAbsentContext(Opbool_exprContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterOpBoolAbsent(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitOpBoolAbsent(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitOpBoolAbsent(this);
@@ -1035,14 +907,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_while_stmt; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterWhile_stmt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitWhile_stmt(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitWhile_stmt(this);
 			else return visitor.visitChildren(this);
@@ -1098,14 +962,6 @@ public class myLanguageParser extends Parser {
 		}
 		public PlainIfContext(If_stmtContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterPlainIf(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitPlainIf(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitPlainIf(this);
 			else return visitor.visitChildren(this);
@@ -1122,14 +978,6 @@ public class myLanguageParser extends Parser {
 			return getRuleContext(StmtContext.class,i);
 		}
 		public IfElseContext(If_stmtContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterIfElse(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitIfElse(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitIfElse(this);
@@ -1199,14 +1047,6 @@ public class myLanguageParser extends Parser {
 		}
 		@Override public int getRuleIndex() { return RULE_c_op; }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterC_op(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitC_op(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitC_op(this);
 			else return visitor.visitChildren(this);
@@ -1260,14 +1100,6 @@ public class myLanguageParser extends Parser {
 		}
 		public RvalTermContext(RvalContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterRvalTerm(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitRvalTerm(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitRvalTerm(this);
 			else return visitor.visitChildren(this);
@@ -1282,14 +1114,6 @@ public class myLanguageParser extends Parser {
 		}
 		public RvalPlusContext(RvalContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterRvalPlus(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitRvalPlus(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitRvalPlus(this);
 			else return visitor.visitChildren(this);
@@ -1303,14 +1127,6 @@ public class myLanguageParser extends Parser {
 			return getRuleContext(TermContext.class,0);
 		}
 		public RvalMinusContext(RvalContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterRvalMinus(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitRvalMinus(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitRvalMinus(this);
@@ -1417,14 +1233,6 @@ public class myLanguageParser extends Parser {
 		}
 		public TermMultFactorContext(TermContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterTermMultFactor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitTermMultFactor(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitTermMultFactor(this);
 			else return visitor.visitChildren(this);
@@ -1435,14 +1243,6 @@ public class myLanguageParser extends Parser {
 			return getRuleContext(FactorContext.class,0);
 		}
 		public TermFactorContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterTermFactor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitTermFactor(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitTermFactor(this);
@@ -1457,14 +1257,6 @@ public class myLanguageParser extends Parser {
 			return getRuleContext(FactorContext.class,0);
 		}
 		public TermDivFactorContext(TermContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterTermDivFactor(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitTermDivFactor(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitTermDivFactor(this);
@@ -1566,14 +1358,6 @@ public class myLanguageParser extends Parser {
 		public TerminalNode INT() { return getToken(myLanguageParser.INT, 0); }
 		public FactorIntContext(FactorContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterFactorInt(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitFactorInt(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitFactorInt(this);
 			else return visitor.visitChildren(this);
@@ -1585,14 +1369,6 @@ public class myLanguageParser extends Parser {
 		}
 		public FactorNegativeContext(FactorContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterFactorNegative(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitFactorNegative(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitFactorNegative(this);
 			else return visitor.visitChildren(this);
@@ -1601,14 +1377,6 @@ public class myLanguageParser extends Parser {
 	public static class FactorFloatContext extends FactorContext {
 		public TerminalNode FLOAT() { return getToken(myLanguageParser.FLOAT, 0); }
 		public FactorFloatContext(FactorContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterFactorFloat(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitFactorFloat(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitFactorFloat(this);
@@ -1621,14 +1389,6 @@ public class myLanguageParser extends Parser {
 		}
 		public FactorExprContext(FactorContext ctx) { copyFrom(ctx); }
 		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterFactorExpr(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitFactorExpr(this);
-		}
-		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitFactorExpr(this);
 			else return visitor.visitChildren(this);
@@ -1637,14 +1397,6 @@ public class myLanguageParser extends Parser {
 	public static class FactorIDContext extends FactorContext {
 		public TerminalNode ID() { return getToken(myLanguageParser.ID, 0); }
 		public FactorIDContext(FactorContext ctx) { copyFrom(ctx); }
-		@Override
-		public void enterRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).enterFactorID(this);
-		}
-		@Override
-		public void exitRule(ParseTreeListener listener) {
-			if ( listener instanceof myLanguageListener ) ((myLanguageListener)listener).exitFactorID(this);
-		}
 		@Override
 		public <T> T accept(ParseTreeVisitor<? extends T> visitor) {
 			if ( visitor instanceof myLanguageVisitor ) return ((myLanguageVisitor<? extends T>)visitor).visitFactorID(this);
