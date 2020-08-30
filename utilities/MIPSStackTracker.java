@@ -78,6 +78,20 @@ public class MIPSStackTracker {
   }
 
   /**
+   * Resets int stack byte pointer
+   */
+  public void resetIntStack() {
+    intStackByte = 0;
+  }
+
+  /**
+   * Resets float stack byte pointer
+   */
+  public void resetFloatStack() {
+    floatStackByte = 0;
+  }
+
+  /**
    * Instruction for memory allocation for every stack in the .data part
    * @return  String containing the instruction
    */

@@ -1,4 +1,4 @@
-mainclass test {
+mainclass NoDeclarationAssign {
 public static void main ( )
 {
     if ( a == 0 ) {

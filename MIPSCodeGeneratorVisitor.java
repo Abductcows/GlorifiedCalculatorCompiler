@@ -166,7 +166,9 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
     // visit first assign expression
     visit(ctx.getChild(0));
     // reset stacks in the event a value was not used
+    stackTracker.resetIntStack();
     write(helper.resetIntStack());
+    stackTracker.resetFloatStack();
     write(helper.resetFloatStack());
     return null;
   }
@@ -675,6 +677,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
   @Override
   public VariableInfo visitFactorID(myLanguageParser.FactorIDContext ctx) {
     String id = ctx.getText();
+
     if (symbolTable.get(id) == null) {
       throw new RuntimeException("Variable \"" + id + "\"" + " referenced but not previously defined");
     }

@@ -1,0 +1,54 @@
+mainclass IntPalindromeDetector {
+
+    public static void main() {
+        int N;
+        N = 123321;
+
+        int digits;
+
+        if (N == 0) {
+            digits = 1;
+        } else {
+            int temp;
+            temp = N;
+
+            while (temp != 0) {
+                digits = digits + 1;
+                temp = temp / 10;
+            }
+        }
+
+        int leftPower, rightPower;
+        rightPower = 10;
+        leftPower = 1;
+
+        int i;
+        for (i=0; i<digits-1; i=i+1) {
+            leftPower = 10 * leftPower;
+        }
+
+        int isPalindrome;
+        isPalindrome = 1;
+
+        int leftDigit, rightDigit;
+        while (leftPower >= rightPower) {
+            leftDigit = (N / leftPower) - (N / leftPower) / 10 * 10;
+
+            rightDigit = (N - N / rightPower * rightPower) / (rightPower/10);
+
+            if (leftDigit != rightDigit) {
+                isPalindrome = 0;
+            }
+
+            leftPower = leftPower / 10;
+            rightPower = rightPower * 10;
+        }
+
+        if (isPalindrome == 1) {
+            println(1);
+        } else {
+            println(0);
+        }
+    }
+
+}

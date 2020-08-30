@@ -1,4 +1,4 @@
-mainclass test {
+mainclass IDTestElse {
 public static void main ( )
 {
     int else;

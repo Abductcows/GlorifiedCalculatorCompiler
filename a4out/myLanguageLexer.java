@@ -1,4 +1,5 @@
-package a4out;// Generated from /home/abductcows/Documents/Antlr4 Projects/myLanguage/myLanguage.g4 by ANTLR 4.8
+// Generated from /home/abductcows/Documents/Antlr4 Projects/myLanguage/myLanguage.g4 by ANTLR 4.8
+package a4out;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
