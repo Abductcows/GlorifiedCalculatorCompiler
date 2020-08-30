@@ -1,4 +1,4 @@
-mainclass test {
+mainclass DeclareTwiceTest {
 public static void main ( )
 {
     int a;

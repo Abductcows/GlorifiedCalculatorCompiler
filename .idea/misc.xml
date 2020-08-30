@@ -9,8 +9,9 @@
           <option name="outputDir" value="$PROJECT_DIR$" />
           <option name="libDir" value="" />
           <option name="encoding" value="" />
-          <option name="pkg" value="" />
+          <option name="pkg" value="a4out" />
           <option name="language" value="Java" />
+          <option name="generateListener" value="false" />
           <option name="generateVisitor" value="true" />
         </PerGrammarGenerationSettings>
       </list>

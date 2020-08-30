@@ -1,4 +1,4 @@
-mainclass divZero {
+mainclass divZeroFloat {
 public static void main ( )
 {
     int i;

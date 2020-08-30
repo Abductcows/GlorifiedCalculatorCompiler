@@ -1,8 +1,0 @@
-mainclass test {
-public static void main ( )
-{
-    if ( a == 0 ) {
-        println(3);
-    }
-}
-}

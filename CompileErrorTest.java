@@ -1,11 +1,11 @@
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -16,89 +16,84 @@ import java.util.stream.Collectors;
  */
 class CompileErrorTest {
 
-  private static int i = -1;
-  private static String currentFile;
   private static final String directory = "CompileErrorFiles";
-
   private static final List<String> filenames =
       Arrays.stream(Objects.requireNonNull(new File(directory).list()))
-      .filter(s -> !s.equals("README.txt"))
+      .filter(s -> s.contains("Test"))
+      .map(s -> directory + "/" + s)
       .collect(Collectors.toList());
+
+  private static int i = -1;
 
   @BeforeEach
   void setUp() throws Exception {
-    // compile next file
-    currentFile = directory + "/" + filenames.get(++i);
-    System.out.println(filenames.get(i));
-    String[] args = { currentFile };
+    String currentFile = filenames.get(++i);
+    System.out.println(currentFile);
+    String[] args = {currentFile};
     Compile.main(args);
   }
 
   @AfterEach
   void tearDown() {
-    // delete last file
-    File asmFile = new File(currentFile + ".asm");
-    asmFile.delete();
+    new File(filenames.get(i) + ".asm").delete();
   }
 
-
   @Test
-  void testFile1() throws Exception {
-  }
+  void testFile1() {}
   @Test
-  void testFile2() throws Exception {
+  void testFile2() {
 
   }
   @Test
-  void testFile3() throws Exception {
+  void testFile3() {
 
   }
   @Test
-  void testFile4() throws Exception {
+  void testFile4() {
 
   }
   @Test
-  void testFile5() throws Exception {
+  void testFile5() {
 
   }
   @Test
-  void testFile6() throws Exception {
+  void testFile6() {
 
   }
   @Test
-  void testFile7() throws Exception {
+  void testFile7() {
 
   }
   @Test
-  void testFile8() throws Exception {
+  void testFile8() {
 
   }
   @Test
-  void testFile9() throws Exception {
+  void testFile9() {
 
   }
   @Test
-  void testFile10() throws Exception {
+  void testFile10() {
 
   }
   @Test
-  void testFile11() throws Exception {
+  void testFile11() {
 
   }
   @Test
-  void testFile12() throws Exception {
+  void testFile12() {
 
   }
   @Test
-  void testFile13() throws Exception {
+  void testFile13() {
 
   }
   @Test
-  void testFile14() throws Exception {
+  void testFile14() {
 
   }
   @Test
-  void testFile15() throws Exception {
+  void testFile15() {
 
   }
 }
