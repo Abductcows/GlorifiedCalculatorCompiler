@@ -15,7 +15,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-
 /**
  * Main class of the compiler. Initialises antlr lexer, parser and visitor from filename argument and visits the
  * parse tree for code generation
@@ -27,10 +26,12 @@ public class Compile {
    * @param args  compiler arguments
    */
   public static void main(String[] args) throws IOException {
-    if (args.length == 0) {
-      throw new RuntimeException("No source code files provided");
+    if (args.length == 0 || args.length == 1 && args[0].equals("help")) {
+      printHelp();
+
     } else if (args.length == 2 && args[0].equals("-dir")) {
       compileDir(args[1]);
+
     } else {
       compileFilesOptionalOutput(Arrays.asList(args));
     }
@@ -49,6 +50,23 @@ public class Compile {
 
     ParseTreeVisitor<SymbolTable.VariableInfo> visitor = new MIPSCodeGeneratorVisitor(outputName); // MIPS generator visitor
     visitor.visit(tree);
+  }
+
+  /**
+   * Help message for empty argument calls or help argument
+   */
+  private static void printHelp() {
+    System.out.println(
+        "Usage: \n" +
+            "   \tmlc.jar -dir <directory>\n" +
+            "    \t\t(to compile all files within a directory)\n" +
+            " or\tmlc.jar <filename1> <filename2> .. <filenameN> [options]\n" +
+            "    \t\t(to compile one or more files)\n" +
+            "\n" +
+            " where options include:\n" +
+            "\t -o <outputFile1> <outputFile2> .. <outputFileN>\n"
+
+    );
   }
 
   /**
