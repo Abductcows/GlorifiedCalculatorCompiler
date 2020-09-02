@@ -2,14 +2,6 @@ package utilities;
 
 @SuppressWarnings("SpellCheckingInspection")
 public class MyLanguageNumbersHelper {
-  public static void main(String[] args) {
-
-    for (int i=1; i<10; i++) {
-      int j = Integer.MIN_VALUE;
-      j *= -1;
-      System.out.println(j);
-    }
-  }
   public static final String INT_MAX = "1073741823";
   public static final String INT_MIN = "-1073741824";
   public static final String FLOAT_MAX = "98079714615416886934934209737619787751599303819750539264";

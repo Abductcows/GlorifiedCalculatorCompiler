@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="myLanguage:jar">
-    <output-path>$PROJECT_DIR$/out/artifacts/myLanguage_jar</output-path>
-    <root id="archive" name="myLanguage.jar">
+  <artifact type="jar" build-on-make="true" name="mlc">
+    <output-path>$PROJECT_DIR$/out/artifacts/mlc</output-path>
+    <root id="archive" name="mlc.jar">
       <element id="module-output" name="myLanguage" />
       <element id="extracted-dir" path="/usr/local/lib/antlr-4.8-complete.jar" path-in-jar="/" />
     </root>
