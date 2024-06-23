@@ -212,8 +212,9 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
         // check if variable has been declared
         VariableInfo var1 = symbolTable.get(id);
         if (var1 == null) {
-            // todo line,column this error
-            throw new RuntimeException("Variable \"" + id + "\"" + " referenced but not previously defined");
+            var offendingToken = ctx.ID().getSymbol();
+            int line = offendingToken.getLine(), column = offendingToken.getCharPositionInLine() + 1;
+            throw new RuntimeException("In %d,%d: Variable \"%s\" referenced but not previously defined".formatted(line, column, id));
         }
 
         // evaluate right hand expression and get its type
@@ -766,7 +767,7 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
     /**
      * Utility method that reuses code for when two number operands are involved. Depending on the types of the arguments,
      * the method writes code for popping from the appropriate stack and storing in the appropriate registers for the
-     * values to be used immediately afterwards. Any necessary conversions are preformed and the values are stored in
+     * values to be used immediately afterward. Any necessary conversions are preformed and the values are stored in
      * $t0 and $t1 for the case of two integer values and $f4 and $f6 otherwise
      *
      * @param t1 Static type of operand 1
