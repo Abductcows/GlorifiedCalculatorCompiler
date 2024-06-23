@@ -1,9 +1,9 @@
 import a4out.myLanguageLexer;
 import a4out.myLanguageParser;
-import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import utilities.ParserBetterMessageErrorStrategy;
 
 import java.io.File;
 import java.io.IOException;
@@ -46,7 +46,7 @@ public class Compile {
         myLanguageLexer lexer = new myLanguageLexer(CharStreams.fromFileName(fileName));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         myLanguageParser parser = new myLanguageParser(tokens);
-        parser.setErrorHandler(new BailErrorStrategy());
+        parser.setErrorHandler(new ParserBetterMessageErrorStrategy());
         ParseTree tree = parser.program(); // Start at the first rule
 
         MIPSCodeGeneratorVisitor visitor = new MIPSCodeGeneratorVisitor(outputName, tree); // MIPS generator visitor

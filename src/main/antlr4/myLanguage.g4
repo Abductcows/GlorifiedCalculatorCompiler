@@ -18,7 +18,7 @@ stmt:     assign_stmt
           | println_stmt
           ;
 
-declaration: type ID (',' ID)* ';'; // Regular expression form allows every id to be on the same depth of the parse tree
+declaration: type ID (',' ID)* ';';
 
 type:     'int' # TypeInt
           | 'float' # TypeFloat

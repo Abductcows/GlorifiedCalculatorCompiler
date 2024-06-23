@@ -20,7 +20,6 @@
             <groupId>org.antlr</groupId>
             <artifactId>antlr4</artifactId>
             <version>${antlr.version}</version>
-            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.antlr</groupId>

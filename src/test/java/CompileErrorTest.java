@@ -1,3 +1,4 @@
+import org.antlr.v4.runtime.misc.ParseCancellationException;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -8,18 +9,14 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 /**
- * Test class meant to check for thrown exceptions. Tests succeed by default but if an exception is thrown during a
- * test, the compilation process has been halted.
- * <p>
- * A test is considered successful only successful if it throws an exception.
- * </p>
+ * Tests for files meant to throw compiler errors
  */
 class CompileErrorTest {
 
-    private static final String directory = "src/test/resources/CompileErrorExamples";
+    private static final String sourceDirectory = "src/test/resources/CompileErrorExamples";
     private static final List<String> filenames =
-            Arrays.stream(Objects.requireNonNull(new File(directory).list()))
-                    .map(s -> directory + "/" + s)
+            Arrays.stream(Objects.requireNonNull(new File(sourceDirectory).list()))
+                    .map(s -> sourceDirectory + "/" + s)
                     .toList();
 
 
@@ -28,6 +25,13 @@ class CompileErrorTest {
         filenames.forEach(filename -> new File(filename + ".asm").delete());
     }
 
+    void printExceptionMessage(Throwable e) {
+        if (e instanceof ParseCancellationException) {
+            printExceptionMessage(e.getCause());
+        } else {
+            e.printStackTrace();
+        }
+    }
 
     @TestFactory
     List<DynamicTest> testFactory() {
@@ -37,7 +41,8 @@ class CompileErrorTest {
                         DynamicTest.dynamicTest(
                                 filename, () -> {
                                     String[] args = {filename};
-                                    assertThrows(Exception.class, () -> Compile.main(args)).printStackTrace();
+                                    Throwable thrown = assertThrows(Exception.class, () -> Compile.main(args));
+                                    printExceptionMessage(thrown);
                                 }
                         )
                 )
