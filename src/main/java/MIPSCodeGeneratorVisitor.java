@@ -1,5 +1,6 @@
 import a4out.myLanguageBaseVisitor;
 import a4out.myLanguageParser;
+import org.antlr.v4.runtime.tree.ParseTree;
 import utilities.*;
 import utilities.SymbolTable.Types;
 import utilities.SymbolTable.VariableInfo;
@@ -11,19 +12,26 @@ import utilities.SymbolTable.VariableInfo;
 @SuppressWarnings("SpellCheckingInspection")
 public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo> {
 
+
+  private final ParseTree tree;
+
   private final MIPSInstructionsHelper helper;
   private final MIPSLabelTracker labels;
   private final MIPSStackTracker stackTracker;
   private final MIPSWriter writer;
   private final SymbolTable symbolTable;
 
+
   /**
    * Passes the String argument to the MIPSWriter object constructor to specify the name of the .asm output file and
    * initialises all other fields
    * @param outputFileName  desired file output name
    */
-  public MIPSCodeGeneratorVisitor(String outputFileName) {
+  public MIPSCodeGeneratorVisitor(String outputFileName, ParseTree tree) {
     super();
+
+    this.tree = tree;
+
     helper = new MIPSInstructionsHelper();
     labels = new MIPSLabelTracker();
     stackTracker = new MIPSStackTracker();
@@ -31,11 +39,8 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
     symbolTable = new SymbolTable();
   }
 
-  /**
-   * Creates the .asm files, adds boilerplate instructions, visits children and merges the temporary files in the end
-   */
-  @Override
-  public VariableInfo visitProgram(myLanguageParser.ProgramContext ctx) {
+  public void start() {
+
     // Create files
     writer.initialiseFiles();
     // Data initialisation
@@ -56,18 +61,27 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
     writer.appendText("\n\nmain:");
 
     try {
-      // visit statements
-      super.visitProgram(ctx);
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      declareVariables(symbolTable);
-      // write program exit
-      write(helper.getProgramExit());
-      // create the final file
-      writer.mergeFiles();
+      visitProgram((myLanguageParser.ProgramContext) this.tree);
+    } catch (RuntimeException e) {
+      writer.abortAndCleanupInitializedFiles();
+      throw e;
     }
 
+    declareVariables(symbolTable);
+    // write program exit
+    write(helper.getProgramExit());
+    // create the final file
+    writer.mergeFiles();
+  }
+
+  /**
+   * Creates the .asm files, adds boilerplate instructions, visits children and merges the temporary files in the end
+   */
+  @Override
+  public VariableInfo visitProgram(myLanguageParser.ProgramContext ctx) {
+
+
+    super.visitProgram(ctx);
     return null;
   }
 
@@ -91,20 +105,13 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
   @SuppressWarnings("DuplicateBranchesInSwitch")
   @Override
   public VariableInfo visitDeclaration(myLanguageParser.DeclarationContext ctx) {
-    Types decType;
+    Types decType = switch (ctx.getChild(0).getText()) {
+        case "int" -> Types.INT;
+        case "float" -> Types.FLOAT;
+        default -> Types.INT;
+    };
 
-    switch (ctx.getChild(0).getText()) {
-      case "int":
-        decType = Types.INT;
-        break;
-      case "float":
-        decType = Types.FLOAT;
-        break;
-      default:
-        decType = Types.INT;
-    }
-
-    // check all IDs
+      // check all IDs
     int i=1; // index of first ID
     while(ctx.getChild(i) != null) {
       String id = ctx.getChild(i).getText();
@@ -276,34 +283,33 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
         branchInstruction += String.format(" $t0, $t1, %s", labels.getElse());
         break;
       case FLOAT: // at least one is float
-        switch (c_op) {
-          case "==":
-            write("c.eq.d $f4, $f6");
-            branchInstruction = "bc1f " + labels.getElse();
-            break;
-          case "<":
-            write("c.lt.d $f4, $f6");
-            branchInstruction = "bc1f " + labels.getElse();
-            break;
-          case "<=":
-            write("c.le.d $f4, $f6");
-            branchInstruction = "bc1f " + labels.getElse();
-            break;
-          case ">":
-            write("c.le.d $f4, $f6");
-            branchInstruction = "bc1t " + labels.getElse();
-            break;
-          case ">=":
-            write("c.lt.d $f4, $f6");
-            branchInstruction = "bc1t " + labels.getElse();
-            break;
-          case "!=":
-            write("c.eq.d $f4, $f6");
-            branchInstruction = "bc1t " + labels.getElse();
-            break;
-          default:
-            branchInstruction = "";
-        }
+          branchInstruction = switch (c_op) {
+              case "==" -> {
+                  write("c.eq.d $f4, $f6");
+                  yield "bc1f " + labels.getElse();
+              }
+              case "<" -> {
+                  write("c.lt.d $f4, $f6");
+                  yield "bc1f " + labels.getElse();
+              }
+              case "<=" -> {
+                  write("c.le.d $f4, $f6");
+                  yield "bc1f " + labels.getElse();
+              }
+              case ">" -> {
+                  write("c.le.d $f4, $f6");
+                  yield "bc1t " + labels.getElse();
+              }
+              case ">=" -> {
+                  write("c.lt.d $f4, $f6");
+                  yield "bc1t " + labels.getElse();
+              }
+              case "!=" -> {
+                  write("c.eq.d $f4, $f6");
+                  yield "bc1t " + labels.getElse();
+              }
+              default -> "";
+          };
         break;
       default:
         branchInstruction = "";
@@ -603,10 +609,11 @@ public class MIPSCodeGeneratorVisitor extends myLanguageBaseVisitor<VariableInfo
         break;
       case FLOAT: // at least one operand is of float type
         // check for division by zero
-        write("mtc1 $zero, $f8\n" +
-            "cvt.d.w $f8, $f8\n" +
-            "c.eq.d $f6, $f8\n" +
-            "bc1t _divByZero");
+        write("""
+                mtc1 $zero, $f8
+                cvt.d.w $f8, $f8
+                c.eq.d $f6, $f8
+                bc1t _divByZero""");
         // preform floating point division
         write("div.d $f4, $f4, $f6");
         // save value

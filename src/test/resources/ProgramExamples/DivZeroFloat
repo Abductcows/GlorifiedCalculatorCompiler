@@ -1,0 +1,8 @@
+mainclass divZeroFloat {
+public static void main ( )
+{
+    int i;
+
+    i = 3 / 0.0;
+}
+}

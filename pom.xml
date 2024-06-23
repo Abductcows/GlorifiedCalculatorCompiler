@@ -20,6 +20,7 @@
             <groupId>org.antlr</groupId>
             <artifactId>antlr4</artifactId>
             <version>${antlr.version}</version>
+            <scope>compile</scope>
         </dependency>
         <dependency>
             <groupId>org.antlr</groupId>
@@ -106,10 +107,30 @@
                             <goal>antlr4</goal>
                         </goals>
                         <configuration>
+                            <arguments>
+                                <argument>-package</argument>
+                                <argument>a4out</argument>
+                            </arguments>
                             <listener>false</listener>
                             <visitor>true</visitor>
                             <outputDirectory>${project.basedir}/src/main/java/a4out</outputDirectory>
                         </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Disable default JAR generation -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.2.0</version>
+                <configuration>
+                    <skip>true</skip>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>default-jar</id>
+                        <phase>none</phase>
                     </execution>
                 </executions>
             </plugin>

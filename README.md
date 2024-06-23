@@ -14,9 +14,9 @@ Floats are in the approximate range (10^-58, 10^57).
 [myLanguage.g4](src/main/antlr4/myLanguage.g4) contains the Antlr4 definition of the language's tokens and grammar (Implementation language independent).  
 [Compile](src/main/java/Compile.java) is the starting class that initialises the Antlr4 lexer and parser. The result tree is visited with a custom visitor to generate the MIPS assembly code.  
 [MIPSCodeGeneratorVisitor](src/main/java/MIPSCodeGeneratorVisitor.java) is the visitor class that does all the code generation and file handling. Heaviest read in the project for sure. Might try to split a few components at some point.  
-[ProgramExamples/](ProgramExamples) contains sample programs in the language that compile succesfully.  
-[CompileErrorFiles/](CompileErrorFiles) contains sample programs that will not compile and throw an exception.  
-[CompileErrorTest](src/main/java/CompileErrorTest.java) class contains a JUnit test class that runs all compile error files and prints their exceptions.  
+[ProgramExamples/](res/ProgramExamples) contains sample programs in the language that compile succesfully.  
+[CompileErrorFiles/](src/test/resources/CompileErrorExamples) contains sample programs that will not compile and throw an exception.  
+[CompileErrorTest](src/test/java/CompileErrorTest.java) class contains a JUnit test class that runs all compile error files and prints their exceptions.  
 
 Compiler should be packed in a .jar file with main class "[Compile](src/main/java/Compile.java)". Running the compiler without arguments will display a java-compile-style usage message.
 Can compile directories full of source files, or 1 or more individual files with custom output path/name.  

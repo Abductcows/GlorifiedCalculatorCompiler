@@ -1,8 +1,5 @@
 grammar myLanguage;
 
-@header {
-package a4out;
-}
 /*
     Parser rules
 */

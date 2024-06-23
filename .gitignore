@@ -2,7 +2,7 @@
 /out/
 /codemr/
 /codemr/myLanguage/
-/ProgramExamples/MIPSOut*
+/res/ProgramExamples/MIPSOut*
 
 src/main/java/a4out
 target

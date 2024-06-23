@@ -1,0 +1,17 @@
+mainclass DecToBin {
+    public static void main ( )
+    {
+        int N;
+        N = 10;
+
+        int coefficient, result;
+        coefficient = 1;
+        while (N > 0) {
+            result = result + coefficient * (N - N/2 * 2);
+            coefficient = coefficient * 10;
+            N = N/2;
+        }
+
+        println(result);
+    }
+}

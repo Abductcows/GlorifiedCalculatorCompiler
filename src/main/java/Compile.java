@@ -1,17 +1,14 @@
 import a4out.myLanguageLexer;
 import a4out.myLanguageParser;
+import org.antlr.v4.runtime.BailErrorStrategy;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
-import org.antlr.v4.runtime.tree.ParseTreeVisitor;
-import utilities.SymbolTable;
 
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.time.LocalDateTime;
-import java.time.ZoneOffset;
+import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -49,10 +46,11 @@ public class Compile {
         myLanguageLexer lexer = new myLanguageLexer(CharStreams.fromFileName(fileName));
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         myLanguageParser parser = new myLanguageParser(tokens);
+        parser.setErrorHandler(new BailErrorStrategy());
         ParseTree tree = parser.program(); // Start at the first rule
 
-        ParseTreeVisitor<SymbolTable.VariableInfo> visitor = new MIPSCodeGeneratorVisitor(outputName); // MIPS generator visitor
-        visitor.visit(tree);
+        MIPSCodeGeneratorVisitor visitor = new MIPSCodeGeneratorVisitor(outputName, tree); // MIPS generator visitor
+        visitor.start();
     }
 
     /**
@@ -60,14 +58,16 @@ public class Compile {
      */
     private static void printHelp() {
         System.out.println(
-                "Usage: \n" +
-                        "   \tmlc.jar -dir <directory>\n" +
-                        "    \t\t(to compile all files within a directory)\n" +
-                        " or\tmlc.jar <filename1> <filename2> .. <filenameN> [options]\n" +
-                        "    \t\t(to compile one or more files)\n" +
-                        "\n" +
-                        " where options include:\n" +
-                        "\t -o <outputFile1> <outputFile2> .. <outputFileN>\n"
+                """
+                        Usage:\s
+                           \tmlc.jar -dir <directory>
+                            \t\t(to compile all files within a directory)
+                         or\tmlc.jar <filename1> <filename2> .. <filenameN> [options]
+                            \t\t(to compile one or more files)
+
+                         where options include:
+                        \t -o <outputFile1> <outputFile2> .. <outputFileN>
+                        """
 
         );
     }
@@ -78,20 +78,15 @@ public class Compile {
      * @param dirName name of the directory
      */
     private static void compileDir(String dirName) throws IOException {
-        // create output directory
-        try {
-            Files.createDirectory(Paths.get(dirName + "/MIPSOut"));
-        } catch (Exception ignored) {
-        }
-        // get list of all files
-        List<String> filenames = Arrays.stream(Objects.requireNonNull(new File(dirName).list()))
+
+        List<String> filesToCompile = Arrays.stream(Objects.requireNonNull(new File(dirName).list()))
                 .filter(s -> !new File(dirName + "/" + s).isDirectory()) // exclude directories
                 .toList();
-        // compile all
 
-        var outputDir = dirName + "/MIPSOut" + LocalDateTime.now().toEpochSecond(ZoneOffset.UTC);
+        // compile all
+        var outputDir = dirName + "/MIPSOut_" + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd_kk-mm-ss"));
         new File(outputDir).mkdirs();
-        for (String filename : filenames) {
+        for (String filename : filesToCompile) {
             compile(dirName + "/" + filename, outputDir + "/" + filename);
         }
     }
