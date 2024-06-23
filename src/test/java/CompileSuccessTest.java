@@ -39,7 +39,7 @@ class CompileSuccessTest {
                                     assertDoesNotThrow(() -> Compile.main(args));
 
                                     ProcessBuilder builder = new ProcessBuilder();
-                                    builder.command("java", "-jar", ".\\Mars4_5.jar", "nc", filename + ".asm");
+                                    builder.command("java", "-jar", "Mars4_5.jar", "nc", filename + ".asm");
                                     builder.redirectErrorStream(true);
 
                                     try {
