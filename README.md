@@ -7,24 +7,16 @@ The compiler was made using [Antlr4](https://www.antlr.org/).
 
 Info about the language (grammar/tokens) can be found at the bottom. I will not "improve" the actual spec to stay true
 to the requirements.
+ 
 
-Integers are 31-bit signed.  
-Floats are in the approximate range (10^-58, 10^57).  
-          
-[myLanguage.g4](src/main/antlr4/myLanguage.g4) contains the Antlr4 definition of the language's tokens and grammar (compiler language independent).  
-[Compile](src/main/java/Compile.java) is the starting class that initialises the Antlr4 lexer and parser. The result tree is visited with a custom visitor to generate the MIPS assembly code.  
-[MIPSCodeGeneratorVisitor](src/main/java/MIPSCodeGeneratorVisitor.java) is the visitor class that does all the code generation and file handling. Heaviest read in the project for sure. Might try to split a few components at some point.  
-[ProgramExamples/](res/ProgramExamples) contains sample programs in the language that compile succesfully.  
-[CompileErrorFiles/](src/test/resources/CompileErrorExamples) contains sample programs that will not compile and throw an exception. Used for tests.  
-
-The project is completely packaged using Maven. Even includes the Mars MIPS emulator, [Mars4_5.jar](Mars4_5.jar)
-
+The project is completely packaged and easily run using `Maven`. Even includes the Mars MIPS emulator, [Mars4_5.jar](Mars4_5.jar)
+to run the compiled programs. See below
 # Building and running the compiler
 
 You need `Maven` and a `JDK` (JDK 14+ should work but prefer 17+). If you use `Intellij IDEA`, you have both already. However
 Maven might not be in your `PATH`, so you will only be able to run Maven commands from your IDE.
 
-### To build, run the following with your directory set to the project's root
+### To build from terminal, run the following with your directory set to the project's root
 ```Maven
 mvn clean package
 ```
@@ -36,7 +28,7 @@ and finally generate the `mlc.jar` compiler executable for this language.
 java -jar .\target\mlc.jar
 ```
 
-Without arguments, a usage message will be displayed. You can then add file arguments to compile as you wish.
+Without arguments, a usage message will be displayed. You can then add file arguments to compile as you wish. 
 
 ### Terminal Use example (current `dir` is project root)
 ```powershell
@@ -83,6 +75,8 @@ MARS 4.5  Copyright 2003-2014 Pete Sanderson and Kenneth Vollmar
 # Sample Program & More Specs
 
 
+
+
 ## Example of printing the first 10 Fibonacci numbers:
 
 ```
@@ -104,6 +98,18 @@ mainclass Fibonacci {
     }
 }
 ```
+
+Integers are 31-bit signed.  
+Floats are in the approximate range (10^-58, 10^57).
+
+[myLanguage.g4](src/main/antlr4/myLanguage.g4) contains the Antlr4 definition of the language's tokens and grammar 
+(compiler implementation language independent).  
+[Compile](src/main/java/Compile.java) is the starting class that initialises the Antlr4 lexer and parser. The result tree is visited with a 
+custom visitor to generate the MIPS assembly code.  
+[MIPSCodeGeneratorVisitor](src/main/java/MIPSCodeGeneratorVisitor.java) is the visitor class that does all the code generation and file handling. Heaviest read 
+in the project for sure. Might try to split a few components at some point.  
+[ProgramExamples/](res/ProgramExamples) contains sample programs in the language that compile succesfully.  
+[CompileErrorFiles/](src/test/resources/CompileErrorExamples) contains sample programs that will not compile and throw an exception. Used for tests.
 
 ## Tokens  
 
