@@ -3,7 +3,6 @@ package utilities;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 /**
  * Symbol table class utilising a HashMap using IDs as keys
@@ -28,7 +27,7 @@ public class SymbolTable {
     public static Types getWiderType(Types t1, Types t2) {
       return Arrays.stream(widerToNarrower)
           .filter(t -> t == t1 || t == t2)
-          .collect(Collectors.toList())
+          .toList()
           .get(0);
     }
   }

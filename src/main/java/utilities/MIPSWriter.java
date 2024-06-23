@@ -5,14 +5,17 @@ import java.time.LocalDateTime;
 
 /**
  * MIPS assembly code writer class
- *
+ * <p>
  * initialiseFiles() is initially called to create the .asm file and the temporary files for the current program
- *
+ * </p>
+ * <p>
  * following are 0 or more calls of writeData() and/or writeText(), which append lines of code to the tempData and
  * tempText files
- *
+ * </p>
+ * <p>
  * finally, mergeFiles() is called, which merges the contents of both temp files and creates the final .asm file. This
  * method also deletes the temporary files
+ * </p>
  */
 public class MIPSWriter {
 

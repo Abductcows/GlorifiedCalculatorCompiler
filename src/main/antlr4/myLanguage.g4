@@ -1,5 +1,8 @@
 grammar myLanguage;
 
+@header {
+package a4out;
+}
 /*
     Parser rules
 */
@@ -83,6 +86,7 @@ factor:   '(' expr ')' # FactorExpr
 /*
     Lexer rules
 */
+
 
 fragment DIGIT  : [0-9];
 fragment LETTER : [A-Za-z];

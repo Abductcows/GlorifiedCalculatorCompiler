@@ -8,7 +8,7 @@ public class MyLanguageNumbersHelper {
   public static final String FLOAT_MIN = "1.593091911132452E-58";
 
   /**
-   * Max and min values for ints and floats. Float min and max refer to it's absolute value
+   * Max and min values for ints and floats. Float min and max refer to its absolute value
    * @return  String containing the .data declarations
    */
   public static String getPrimitiveConstraintDeclarations() {
