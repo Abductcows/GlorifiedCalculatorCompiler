@@ -1,8 +1,8 @@
 # Glorified Calculator Compiler
-
+[Jump to language sample](#sample-program--more-specs)
 #### just so that i can say gcc.
 
-Made this for a uni project. Lot of fun and I keep coming back to find new improvements in design/readability/portability.
+`Custom language` -> `MIPS assembly` compiler. Made this for a uni project. Lot of fun and I keep coming back to find new improvements in design/readability/portability.
 The compiler was made using [Antlr4](https://www.antlr.org/).
 
 Info about the language (grammar/tokens) can be found at the bottom. I will not "improve" the actual spec to stay true
